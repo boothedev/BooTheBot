@@ -19,4 +19,3 @@ Join in and discover the mysteries of your future now!
 ### Special thanks to:
 - **[Twilight](https://github.com/twilight-rs)** - Rust libraries for the Discord API
 - **YAM Community** - for testing the bot and providing feedback
-- **Thỏ ngố** - the reason the bot was created
