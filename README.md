@@ -10,6 +10,6 @@ Cùng tham gia và khám phá những bí ẩn tương lai của bạn ngay nào
 > Đến thăm nhà của **BooTheBot** tại **[Carrotland Support](https://discord.gg/NakWrpmRFj)**.
 
 ### Xin gửi lời cảm ơn đặc biệt đến:
-- **[Twilight](https://discord.gg/twilight-rs)** - thư viện phát triển Discord bot
-- **[Cộng đồng YAM](https://discord.gg/yamcommunity)** - hỗ trợ test bot và góp ý
+- **[Twilight](https://github.com/twilight-rs)** - thư viện phát triển Discord bot
+- **Cộng đồng YAM** - hỗ trợ test bot và góp ý
 - **Thỏ ngố** - lý do bot ra đời
