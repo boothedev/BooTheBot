@@ -12,4 +12,3 @@ Cùng tham gia và khám phá những bí ẩn tương lai của bạn ngay nào
 ### Xin gửi lời cảm ơn đặc biệt đến:
 - **[Twilight](https://github.com/twilight-rs)** - thư viện phát triển Discord bot
 - **Cộng đồng YAM** - hỗ trợ test bot và góp ý
-- **Thỏ ngố** - lý do bot ra đời
