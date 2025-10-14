@@ -1,4 +1,4 @@
-# Discover the Mysteries of the Universe with BooTheBot
+# BooTheBot: Your Mystic Guide
 
 Have you ever wondered if the future can be changed? 
 Are you looking for help in making important decisions, 
