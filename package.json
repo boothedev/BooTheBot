@@ -14,5 +14,9 @@
 		"typescript": "^5.5.2",
 		"vitest": "~3.2.0",
 		"wrangler": "^4.54.0"
+	},
+	"dependencies": {
+		"discord-api-types": "^0.38.37",
+		"discord-interactions": "^4.4.0"
 	}
 }
