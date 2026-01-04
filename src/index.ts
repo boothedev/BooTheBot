@@ -19,7 +19,7 @@ export default {
 		const url = new URL(request.url);
 		const path = url.pathname;
 		const method = request.method as Method;
-		const response = ENDPOINTS[path]?.[method]?.(...args) ?? null;
+		const response = (await ENDPOINTS[path]?.[method]?.(...args)) ?? null;
 		if (response === null) return ERROR_RESPONSES.NotFound();
 		return response;
 	},
