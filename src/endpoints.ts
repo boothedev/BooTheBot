@@ -1,4 +1,5 @@
-import discordInteractionEndpoint from './discord';
+import discordEndpointHandler from './discord';
+import { EndpointHandler, EndpointPairHandler } from '@/types';
 
 const ERROR_RESPONSES = {
 	NotFound: (body = 'Not Found') => new Response(body, { status: 404 }),
@@ -16,10 +17,10 @@ const ENDPOINTS: Record<string, EndpointPairHandler> = {
 		GET: homeEndpoint,
 	},
 	'/discord': {
-		POST: discordInteractionEndpoint,
+		POST: discordEndpointHandler,
 	},
 	'/messenger': {
-		POST: discordInteractionEndpoint,
+		POST: discordEndpointHandler,
 	},
 };
 

@@ -11,15 +11,19 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { ENDPOINTS, ERROR_RESPONSES } from './endpointHandlers';
+import { ENDPOINTS, ERROR_RESPONSES } from './endpoints';
+import { Method, RequestState } from '@/types';
+import { StorageManager } from './storage';
 
 export default {
-	async fetch(...args) {
-		const [request] = args;
+	async fetch(request, env, ctx) {
 		const url = new URL(request.url);
 		const path = url.pathname;
 		const method = request.method as Method;
-		const response = (await ENDPOINTS[path]?.[method]?.(...args)) ?? null;
+		const reqState: RequestState = { ctx, env, request };
+		const storageMgr = new StorageManager(reqState);
+
+		const response = (await ENDPOINTS[path]?.[method]?.(storageMgr)) ?? null;
 		if (response === null) return ERROR_RESPONSES.NotFound();
 		return response;
 	},

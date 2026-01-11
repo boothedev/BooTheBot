@@ -1,3 +1,4 @@
+import { StorageManager } from '@/storage';
 import {
 	APIBaseInteraction,
 	APIMessageMentionableSelectInteractionData,
@@ -16,6 +17,7 @@ import {
 	APIPrimaryEntryPointCommandInteraction,
 	APIUserApplicationCommandInteraction,
 	InteractionType,
+	Locale,
 } from 'discord-api-types/v10';
 
 type APIMessageBaseSelectMenuInteraction<
@@ -33,7 +35,7 @@ export type APIMessageUserSelectMenuInteraction = APIMessageBaseSelectMenuIntera
 export type APIMessageRoleSelectMenuInteraction = APIMessageBaseSelectMenuInteraction<APIMessageRoleSelectInteractionData>;
 export type APIMessageMentionableSelectMenuInteraction = APIMessageBaseSelectMenuInteraction<APIMessageMentionableSelectInteractionData>;
 
-export interface InteractionHandlerMap {
+export interface InteractionMap {
 	ping: APIPingInteraction;
 	chatInputCommand: APIChatInputApplicationCommandInteraction;
 	messageCommand: APIMessageApplicationCommandInteraction;
@@ -49,12 +51,38 @@ export interface InteractionHandlerMap {
 	applicationCommandAutocomplete: APIApplicationCommandAutocompleteInteraction;
 }
 
-export type GenericInteraction = InteractionHandlerMap[keyof InteractionHandlerMap];
-export type GenericHandler<T extends keyof InteractionHandlerMap> = (
-	interaction: InteractionHandlerMap[T],
+export type GenericInteraction = InteractionMap[keyof InteractionMap];
+export type Handler<T extends keyof InteractionMap> = (
+	interaction: InteractionMap[T],
+	storageMgr: StorageManager,
 	...args: any[]
 ) => Promise<APIInteractionResponse> | APIInteractionResponse;
 
-export type Handlers = {
-	[K in keyof InteractionHandlerMap]?: GenericHandler<K>;
+export type HandlerMap = {
+	[K in keyof InteractionMap]?: Handler<K>;
 };
+
+export type HandlerCustomMap<K extends keyof InteractionMap> = Record<string, Handler<K>>;
+
+export type ClowCard = {
+	name: string;
+	meaning: string;
+	message: string;
+	warning: string;
+};
+
+export type ClowCardManifest = {
+	locales: Locale[];
+	images: { NA: string } & Record<string, string>;
+};
+
+export type SpriteCard = {
+	name: string;
+	meaning: string;
+	warning: string;
+	message: string;
+};
+
+export type BookOfAnswer = string;
+
+export type RequireKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;

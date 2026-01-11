@@ -1,14 +1,14 @@
 import {
-	APIBaseInteraction,
-	APIGuildInteractionWrapper,
+	APIInteractionResponse,
 	ApplicationCommandType,
 	ComponentType,
-	InteractionContextType,
+	InteractionResponseType,
 	InteractionType,
+	MessageFlags,
 } from 'discord-api-types/v10';
-import { InteractionHandlerMap } from './types';
+import { InteractionMap } from './types';
 
-function interactionClassifier(interaction: InteractionHandlerMap[keyof InteractionHandlerMap]): keyof InteractionHandlerMap | null {
+function interactionClassifier(interaction: InteractionMap[keyof InteractionMap]): keyof InteractionMap | null {
 	// Classify interactions
 	switch (interaction.type) {
 		// Handle Ping interaction
@@ -65,16 +65,16 @@ function interactionClassifier(interaction: InteractionHandlerMap[keyof Interact
 	}
 }
 
-function isGuildInteraction<T extends APIBaseInteraction<InteractionType, unknown>>(
-	interaction: T,
-): interaction is T & APIGuildInteractionWrapper<T> {
-	return interaction.context === InteractionContextType.Guild;
+function unimplementInteractionResponse(): Promise<APIInteractionResponse> | APIInteractionResponse {
+	return {
+		type: InteractionResponseType.ChannelMessageWithSource,
+		data: {
+			content: 'unimplemented',
+			flags: MessageFlags.Ephemeral,
+		},
+	};
 }
 
-function isDMInteraction<T extends APIBaseInteraction<InteractionType, unknown>>(
-	interaction: T,
-): interaction is T & APIGuildInteractionWrapper<T> {
-	return !isGuildInteraction(interaction);
-}
+const DISCORD_EPOCH = 1420070400000;
 
-export { interactionClassifier, isGuildInteraction, isDMInteraction };
+export { interactionClassifier, unimplementInteractionResponse, DISCORD_EPOCH };
