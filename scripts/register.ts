@@ -37,7 +37,7 @@ const clowCommand: RESTPostAPIChatInputApplicationCommandsJSONBody = {
 			name: 'mode',
 			description: 'Choose a cycle to ground your reading',
 			choices: Object.entries(TimeMode).map(([k, v]) => ({
-				name: k + (k === TimeMode.Daily ? ' (default)' : ''),
+				name: k + (v === TimeMode.Daily ? ' (default)' : ''),
 				value: v,
 			})),
 		},

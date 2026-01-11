@@ -1,4 +1,11 @@
-import { APIInteractionResponseCallbackData, ComponentType, InteractionResponseType, Locale, MessageFlags } from 'discord-api-types/v10';
+import {
+	APIApplicationCommandInteractionDataStringOption,
+	APIInteractionResponseCallbackData,
+	ComponentType,
+	InteractionResponseType,
+	Locale,
+	MessageFlags,
+} from 'discord-api-types/v10';
 import { isDMInteraction, isGuildInteraction } from 'discord-api-types/utils';
 import { ClowCard, ClowCardManifest, Handler } from '@/discord/types';
 import clowcardBase from '@/data/clow/data.json';
@@ -16,7 +23,8 @@ const clowHandler: Handler<'chatInputCommand'> = async (interaction, storageMgr)
 	const settings = await storageMgr.fetch('userPrefs', userId);
 	const timezone = settings?.timezone;
 	const locale = settings?.locale ?? interaction.locale;
-	const timemode = interaction.data.options?.[0].name as TimeMode;
+	const options = interaction.data.options as APIApplicationCommandInteractionDataStringOption[] | undefined;
+	const timemode = options?.[0]?.value as TimeMode;
 	const manifest = clowcardManifest as ClowCardManifest;
 
 	// Get target deck
