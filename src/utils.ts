@@ -1,5 +1,6 @@
 import { Snowflake } from 'discord-api-types/globals';
-import { RandomConfig, TimeMode } from '@/types';
+import { RandomConfig } from '@/types';
+import { TimeMode } from '@shared/consts';
 
 class Hasher {
 	private static prime = 16777619;
