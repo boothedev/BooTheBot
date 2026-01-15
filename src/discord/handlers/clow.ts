@@ -3,13 +3,12 @@ import {
 	APIInteractionResponseCallbackData,
 	ComponentType,
 	InteractionResponseType,
-	Locale,
 	MessageFlags,
 } from 'discord-api-types/v10';
 import { isDMInteraction, isGuildInteraction } from 'discord-api-types/utils';
 import { ClowCard, ClowCardManifest, Handler } from '@/discord/types';
-import clowcardBase from '@/data/clow/data.json';
-import clowcardManifest from '@/data/clow/manifest.json';
+import clowcardBase from '@/static/clow.data.json';
+import clowcardManifest from '@/static/clow.manifest.json';
 import { getRandomItem, Hasher, snowflakeToNumber } from '@/utils';
 import { snowflakeToTimestamp } from '@/utils';
 import { DISCORD_EPOCH } from '@/discord/utils';
