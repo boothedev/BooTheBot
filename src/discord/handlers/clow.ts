@@ -10,7 +10,7 @@ import { isDMInteraction, isGuildInteraction } from 'discord-api-types/utils';
 import { ClowCard, ClowCardManifest, Handler } from '@/discord/types';
 import clowcardBase from '@/data/clow/data.json';
 import clowcardManifest from '@/data/clow/manifest.json';
-import { getRandomItem, Hasher } from '@/utils';
+import { getRandomItem, Hasher, snowflakeToNumber } from '@/utils';
 import { snowflakeToTimestamp } from '@/utils';
 import { DISCORD_EPOCH } from '@/discord/utils';
 import { type AssetFilePath } from '@/types';
@@ -26,6 +26,7 @@ const clowHandler: Handler<'chatInputCommand'> = async (interaction, storageMgr)
 	const options = interaction.data.options as APIApplicationCommandInteractionDataStringOption[] | undefined;
 	const timemode = options?.[0]?.value as TimeMode;
 	const manifest = clowcardManifest as ClowCardManifest;
+	const hashMaterial = [snowflakeToNumber(userId)];
 
 	// Get target deck
 	let deck: ClowCard[] = clowcardBase;
@@ -43,7 +44,7 @@ const clowHandler: Handler<'chatInputCommand'> = async (interaction, storageMgr)
 		timestamp: timestamp,
 		timezone: timezone,
 	};
-	const card = getRandomItem(deck, randomConfig, [userId]);
+	const card = getRandomItem(deck, randomConfig, hashMaterial);
 	const imageFile = manifest.images[card.name] ?? manifest.images.NA;
 	const imageFilePath: AssetFilePath = ['clow', 'images', imageFile];
 	const imageUrl = storageMgr.getStaticUrl(imageFilePath).toString();

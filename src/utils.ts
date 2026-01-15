@@ -73,7 +73,7 @@ function getRandomItem<T>(collection: T[], config: RandomConfig = {}, hashMateri
 
 	// Deterministic index selection
 	const index = Math.abs(hashResult) % collection.length;
-	return { ...collection[index] };
+	return collection[index];
 }
 
 function snowflakeToTimestamp(snowflake: Snowflake, epochOffset: number = 0) {
@@ -83,7 +83,7 @@ function snowflakeToTimestamp(snowflake: Snowflake, epochOffset: number = 0) {
 	return unixTimestampMs;
 }
 
-function getTimestampAtTimezone(timestamp: number, timeZone: string = 'UTC', timeMode: TimeMode = TimeMode.Daily) {
+function getTimestampAtTimezone(timestamp: number, timeZone: string = 'UTC', timeMode: TimeMode = TimeMode.Daily): number {
 	if (timeMode === TimeMode.Randomly) return timestamp;
 
 	const datetimeNow = new Date(timestamp);
@@ -113,4 +113,12 @@ function getTimestampAtTimezone(timestamp: number, timeZone: string = 'UTC', tim
 	return date.getTime();
 }
 
-export { Hasher, snowflakeToTimestamp, getTimestampAtTimezone, getRandomItem };
+function snowflakeToNumber(snowflake: Snowflake): number {
+	const buffer = new ArrayBuffer(8);
+	const view = new DataView(buffer);
+	const u64Value = BigInt(snowflake);
+	view.setBigUint64(0, u64Value, true);
+	return view.getFloat64(0, true);
+}
+
+export { Hasher, snowflakeToTimestamp, getTimestampAtTimezone, getRandomItem, snowflakeToNumber };

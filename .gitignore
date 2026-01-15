@@ -166,3 +166,6 @@ dist
 !.env.example
 !.env.dev.example
 .wrangler/
+
+# Temporary
+scripts/tmp.ts
