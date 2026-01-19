@@ -1,8 +1,8 @@
 import { Handler } from '@/discord/types';
-import { unimplementInteractionResponse } from '@/discord/utils';
+import cardHandler from './card';
 
-const spriteHandler: Handler<'chatInputCommand'> = () => {
-	return unimplementInteractionResponse();
+const spriteHandler: Handler<'chatInputCommand'> = async (interaction, storageMgr) => {
+	return cardHandler(interaction, storageMgr, 'sprite');
 };
 
 export default spriteHandler;

@@ -1,5 +1,7 @@
 import {
+	APIApplicationCommandInteractionDataOption,
 	APIInteractionResponse,
+	ApplicationCommandOptionType,
 	ApplicationCommandType,
 	ComponentType,
 	InteractionResponseType,
@@ -75,6 +77,19 @@ function unimplementInteractionResponse(): Promise<APIInteractionResponse> | API
 	};
 }
 
+function mapCommandOptions(options?: APIApplicationCommandInteractionDataOption<InteractionType.ApplicationCommand>[]) {
+	const optionMap: Record<string, string | number | boolean> = {};
+	if (options === undefined) return optionMap;
+
+	for (const option of options) {
+		const isNotSubcommand =
+			option.type === ApplicationCommandOptionType.Subcommand || option.type === ApplicationCommandOptionType.SubcommandGroup;
+		if (isNotSubcommand) continue;
+		optionMap[option.name] = option.value;
+	}
+	return optionMap;
+}
+
 const DISCORD_EPOCH = 1420070400000;
 
-export { interactionClassifier, unimplementInteractionResponse, DISCORD_EPOCH };
+export { interactionClassifier, mapCommandOptions, unimplementInteractionResponse, DISCORD_EPOCH };

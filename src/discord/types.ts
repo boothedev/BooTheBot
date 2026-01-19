@@ -64,24 +64,23 @@ export type HandlerMap = {
 
 export type HandlerCustomMap<K extends keyof InteractionMap> = Record<string, Handler<K>>;
 
-export type ClowCard = {
+export type FortuneCard = {
 	name: string;
 	meaning: string;
 	message: string;
 	warning: string;
 };
 
-export type ClowCardManifest = {
+export type FortuneCardWithImage = FortuneCard & {
+	image: string;
+};
+
+export type FortuneCardManifest = {
 	locales: Locale[];
 	images: { NA: string } & Record<string, string>;
 };
 
-export type SpriteCard = {
-	name: string;
-	meaning: string;
-	warning: string;
-	message: string;
-};
+export type AvailableFortuneDeck = 'clow' | 'sprite';
 
 export type BookOfAnswer = string;
 

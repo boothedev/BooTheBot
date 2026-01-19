@@ -1,16 +1,15 @@
-import { InteractionResponseType } from 'discord-api-types/v10';
 import { Handler, HandlerCustomMap, HandlerMap } from '@/discord/types';
 import pickHandler from './pick';
 import clowHandler from './clow';
 import spriteHandler from './sprite';
-import answerHandler from './answer';
+import askHandler from './ask';
 import settingsHandler from './settings';
 
 const chatInputCommandHandlers: HandlerCustomMap<'chatInputCommand'> = {
 	pick: pickHandler,
 	clow: clowHandler,
 	sprite: spriteHandler,
-	answer: answerHandler,
+	ask: askHandler,
 	settings: settingsHandler,
 };
 

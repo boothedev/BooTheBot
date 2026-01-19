@@ -26,6 +26,7 @@ export type RandomConfig = {
 	timestamp?: number;
 	timezone?: string;
 	timemode?: TimeMode;
+	collectionLength: number;
 };
 
 type AssetGroup = 'clow' | 'sprite' | 'answer';

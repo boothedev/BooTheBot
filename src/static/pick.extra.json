@@ -1,0 +1,32 @@
+{
+	"vibes": [
+		{ "vibe": "The Judge", "phrase": "⚖️ After careful deliberation...", "emoji": "🏆", "color": 15844367 },
+		{ "vibe": "The Seer", "phrase": "🔮 The spirits have whispered...", "emoji": "✨", "color": 10181046 },
+		{ "vibe": "The Chaotic", "phrase": "🌪️ I closed my eyes and pointed at...", "emoji": "🎯", "color": 15105570 },
+		{ "vibe": "The Gamer", "phrase": "🎲 The RNG gods have spoken:", "emoji": "⚔️", "color": 15277667 },
+		{ "vibe": "The Casual", "phrase": "🖐️ I'll go with...", "emoji": "📍", "color": 9807270 },
+		{ "vibe": "The Elegant", "phrase": "📜 The stars have aligned for...", "emoji": "💎", "color": 15584835 },
+		{ "vibe": "The Robotic", "phrase": "🤖 Processing data... result found:", "emoji": "💾", "color": 3426654 },
+		{ "vibe": "The Starry", "phrase": "✨ The Stars Have Aligned For", "emoji": "🌟", "color": 16775885 },
+		{ "vibe": "The Sealed", "phrase": "🔮 Your Fate Is Sealed", "emoji": "🧿", "color": 9323437 },
+		{ "vibe": "The Universe", "phrase": "🌌 The Universe Suggests", "emoji": "🪐", "color": 2899536 },
+		{ "vibe": "The Scribe", "phrase": "📜 It Is Written", "emoji": "🖋️", "color": 13853184 },
+		{ "vibe": "The System", "phrase": "⚙️ System Preference", "emoji": "🛠️", "color": 8356749 },
+		{ "vibe": "The Calculator", "phrase": "🤖 Optimal Choice Calculated", "emoji": "📊", "color": 3066993 },
+		{ "vibe": "The Randomizer", "phrase": "🔢 Randomized Selection", "emoji": "🎲", "color": 3447003 },
+		{ "vibe": "The Satellite", "phrase": "🛰️ Data Analysis Complete", "emoji": "📡", "color": 1752220 },
+		{ "vibe": "The Marksman", "phrase": "🎯 Your Mission", "emoji": "🚩", "color": 12597547 },
+		{ "vibe": "The Bold", "phrase": "🔥 Just Do It", "emoji": "🧨", "color": 16729856 },
+		{ "vibe": "The Quick", "phrase": "⚡ No More Hesitation", "emoji": "💥", "color": 16776960 },
+		{ "vibe": "The Astronaut", "phrase": "🚀 Blast Off With", "emoji": "👨‍🚀", "color": 128 },
+		{ "vibe": "The Friendly", "phrase": "👋 How About This", "emoji": "🎈", "color": 16744319 },
+		{ "vibe": "The Thinker", "phrase": "💡 Here Is An Idea", "emoji": "💡", "color": 15974418 },
+		{ "vibe": "The Suggestor", "phrase": "✨ My Suggestion Is", "emoji": "💠", "color": 65535 },
+		{ "vibe": "The Party", "phrase": "🎈 Let's Go With", "emoji": "🎊", "color": 16711935 },
+		{ "vibe": "The Flames", "phrase": "🕯️ The flames reveal...", "emoji": "🔥", "color": 15158332 },
+		{ "vibe": "The Pro", "phrase": "🕹️ Player 1 Selects", "emoji": "🎖️", "color": 1118481 },
+		{ "vibe": "The Chef", "phrase": "👨‍🍳 Today's Special Is", "emoji": "🍴", "color": 16777215 },
+		{ "vibe": "The Nature", "phrase": "🍃 The Wind Whispers", "emoji": "🌿", "color": 2599776 },
+		{ "vibe": "The Deep", "phrase": "🌊 From The Depths", "emoji": "🐚", "color": 2720185 }
+	]
+}

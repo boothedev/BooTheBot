@@ -40,6 +40,7 @@
 
 		"paths": {
 			"@/*": ["./src/*"],
+			"@static/*": ["./src/static/*"],
 			"@shared/*": ["./shared/*"],
 		},
 	},

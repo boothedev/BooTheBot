@@ -60,9 +60,9 @@ class Hasher {
 	}
 }
 
-function getRandomItem<T>(collection: T[], config: RandomConfig = {}, hashMaterial: any[] = []): T {
+function getRandomIndex(config: RandomConfig, hashMaterial: any[] = []): number {
 	// Extract config
-	const { timestamp = Date.now(), timezone = 'UTC', timemode = TimeMode.Daily } = config;
+	const { timestamp = Date.now(), timezone = 'UTC', timemode = TimeMode.Randomly, collectionLength } = config;
 
 	// Compute hash
 	const hasher = new Hasher();
@@ -72,8 +72,8 @@ function getRandomItem<T>(collection: T[], config: RandomConfig = {}, hashMateri
 	const hashResult = hasher.finish();
 
 	// Deterministic index selection
-	const index = Math.abs(hashResult) % collection.length;
-	return collection[index];
+	const index = Math.abs(hashResult) % collectionLength;
+	return index;
 }
 
 function snowflakeToTimestamp(snowflake: Snowflake, epochOffset: number = 0) {
@@ -121,4 +121,9 @@ function snowflakeToNumber(snowflake: Snowflake): number {
 	return view.getFloat64(0, true);
 }
 
-export { Hasher, snowflakeToTimestamp, getTimestampAtTimezone, getRandomItem, snowflakeToNumber };
+function escapeMarkdown(markdownText: string) {
+	const markdownChars = /([\\`*_{}[\]()#+-.!>])/g;
+	return markdownText.replace(markdownChars, '\\$1');
+}
+
+export { Hasher, snowflakeToTimestamp, getTimestampAtTimezone, getRandomIndex, snowflakeToNumber, escapeMarkdown };

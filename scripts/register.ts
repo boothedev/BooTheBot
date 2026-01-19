@@ -34,7 +34,7 @@ const clowCommand: RESTPostAPIChatInputApplicationCommandsJSONBody = {
 	options: [
 		{
 			type: ApplicationCommandOptionType.String,
-			name: 'mode',
+			name: 'timemode',
 			description: 'Choose a cycle to ground your reading',
 			choices: Object.entries(TimeMode).map(([k, v]) => ({
 				name: k + (v === TimeMode.Daily ? ' (default)' : ''),
@@ -47,10 +47,21 @@ const spriteCommand: RESTPostAPIChatInputApplicationCommandsJSONBody = {
 	type: ApplicationCommandType.ChatInput,
 	name: 'sprite',
 	description: 'Draw your daily card from the Whimsical Sprite Oracle',
+	options: [
+		{
+			type: ApplicationCommandOptionType.String,
+			name: 'timemode',
+			description: 'Choose a cycle to ground your reading',
+			choices: Object.entries(TimeMode).map(([k, v]) => ({
+				name: k + (v === TimeMode.Daily ? ' (default)' : ''),
+				value: v,
+			})),
+		},
+	],
 };
 const answerCommand: RESTPostAPIChatInputApplicationCommandsJSONBody = {
 	type: ApplicationCommandType.ChatInput,
-	name: 'answer',
+	name: 'ask',
 	description: 'Ask a question and receive an answer from the void',
 	options: [
 		{
