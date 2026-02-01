@@ -122,7 +122,13 @@ const settingsCommand: RESTPostAPIChatInputApplicationCommandsJSONBody = {
 	],
 };
 
-const commands: RESTPutAPIApplicationCommandsJSONBody = [pickCommand, clowCommand, spriteCommand, answerCommand, settingsCommand];
+const commands: RESTPutAPIApplicationCommandsJSONBody = [
+	pickCommand,
+	clowCommand,
+	spriteCommand,
+	answerCommand,
+	// settingsCommand, // config user preferences
+];
 
 async function register() {
 	const url = `https://discord.com/api/v10/applications/${applicationId}/commands`;

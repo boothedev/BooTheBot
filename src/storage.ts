@@ -1,4 +1,3 @@
-import { Locale, Snowflake } from 'discord-api-types/v10';
 import { AssetFilePath, Group, Memo, MemoSubType, RequestState, UserSettings } from '@/types';
 import { GenericInteraction } from './discord/types';
 import { verifyKey } from 'discord-interactions';
