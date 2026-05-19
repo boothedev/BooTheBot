@@ -2,6 +2,7 @@
 .devcontainer
 .dockerignore
 .fuse_hidden*
+.env
 Dockerfile
 fly.toml
 target
