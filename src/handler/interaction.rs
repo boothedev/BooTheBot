@@ -5,8 +5,8 @@ use super::{
     InputRaw,
 };
 use crate::{
-    commands::Marker, handler::data::ClowCardInfo, models::custom_id::CustomId,
-    extensions::CommandOptionValueData,
+    commands::Marker, extensions::CommandOptionValueData, handler::data::ClowCardInfo,
+    models::custom_id::CustomId,
 };
 use twilight_model::{
     application::interaction::{
@@ -31,7 +31,7 @@ impl<'a> From<&'a Interaction> for InputRaw<'a> {
 
 impl<'a> From<&'a Interaction> for Data<'a> {
     fn from(value: &'a Interaction) -> Self {
-        fn app_cmd(data: &CommandData, author: Id<UserMarker>) -> Data {
+        fn app_cmd(data: &'_ CommandData, author: Id<UserMarker>) -> Data<'_> {
             let args = data.options.as_slice();
             let Ok(name) = data.name.parse() else {
                 return Data::None;
