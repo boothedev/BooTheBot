@@ -4,6 +4,7 @@ use super::data::{
 };
 use crate::{
     constants::{self, color},
+    handler::data::BookOfAI,
     models::{
         clow_cards::ClowCardDeck,
         relationship_level::RelationshipLevel,
@@ -37,6 +38,7 @@ impl From<Data<'_>> for ResponseData<'_> {
         match value {
             Data::RandomPick(inner) => inner.into(),
             Data::BookOfAnswers(inner) => inner.into(),
+            Data::BookOfAI(inner) => inner.into(),
             Data::DrawClowcard(inner) => inner.into(),
             Data::ClowCardInfo(inner) => inner.into(),
             Data::Dice(inner) => inner.into(),
@@ -104,6 +106,27 @@ impl From<BookOfAnswers<'_>> for ResponseData<'_> {
 
         let author = value.author.expect("author should always be present");
         let quote = BookOfAnswers::draw(value.prompt, author);
+
+        let content = if value.prompt.is_some() && value.show_prompt {
+            let prompt = value.prompt.unwrap();
+            format!("**Prompt:** {prompt}\n>>> {quote}").into()
+        } else {
+            quote.into()
+        };
+
+        Self {
+            content,
+            ..Default::default()
+        }
+    }
+}
+
+impl From<BookOfAI<'_>> for ResponseData<'_> {
+    fn from(value: BookOfAI) -> Self {
+        use crate::models::book_of_ai::BookOfAI;
+
+        let author = value.author.expect("author should always be present");
+        let quote = BookOfAI::draw(value.prompt, author);
 
         let content = if value.prompt.is_some() && value.show_prompt {
             let prompt = value.prompt.unwrap();

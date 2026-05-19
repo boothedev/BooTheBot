@@ -5,7 +5,9 @@ use super::{
     InputRaw,
 };
 use crate::{
-    commands::Marker, extensions::CommandOptionValueData, handler::data::ClowCardInfo,
+    commands::Marker,
+    extensions::CommandOptionValueData,
+    handler::data::{BookOfAI, ClowCardInfo},
     models::custom_id::CustomId,
 };
 use twilight_model::{
@@ -56,6 +58,11 @@ impl<'a> From<&'a Interaction> for Data<'a> {
                     let mut boa: BookOfAnswers = args.into();
                     boa.author = Some(author);
                     Data::BookOfAnswers(boa)
+                }
+                Marker::BookOfAI => {
+                    let mut boai: BookOfAI = args.into();
+                    boai.author = Some(author);
+                    Data::BookOfAI(boai)
                 }
                 Marker::Dice => Data::Dice(args.into()),
                 Marker::About => Data::About(args.into()),
@@ -109,6 +116,20 @@ impl<'a> From<&'a [CommandDataOption]> for BookOfAnswers<'a> {
         let input = value.first().map(|op| match &op.value {
             CommandOptionValue::String(input) => input.as_str(),
             _ => unreachable!("BookOfAnswers takes a string only"),
+        });
+        Self {
+            prompt: input,
+            author: None,
+            show_prompt: true,
+        }
+    }
+}
+
+impl<'a> From<&'a [CommandDataOption]> for BookOfAI<'a> {
+    fn from(value: &'a [CommandDataOption]) -> Self {
+        let input = value.first().map(|op| match &op.value {
+            CommandOptionValue::String(input) => input.as_str(),
+            _ => unreachable!("BookOfAI takes a string only"),
         });
         Self {
             prompt: input,

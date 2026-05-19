@@ -29,6 +29,10 @@ const BOOK_OF_ANSWERS: CommandNamePair = CommandNamePair {
     names: &["bookofanswers", "boa"],
     id: Marker::BookOfAnswers,
 };
+const BOOK_OF_AI: CommandNamePair = CommandNamePair {
+    names: &["bookofai", "boai"],
+    id: Marker::BookOfAI,
+};
 const ABOUT: CommandNamePair = CommandNamePair {
     names: &["about"],
     id: Marker::About,
@@ -39,6 +43,7 @@ const CMD_NAMES: &[CommandNamePair] = &[
     RELA_CALC,
     DICE,
     BOOK_OF_ANSWERS,
+    BOOK_OF_AI,
     ABOUT,
 ];
 
@@ -51,6 +56,7 @@ struct CommandNamePair<'a> {
 pub enum Marker {
     RandomPick,
     BookOfAnswers,
+    BookOfAI,
     DrawClowcard,
     RelationshipCalculator,
     Dice,

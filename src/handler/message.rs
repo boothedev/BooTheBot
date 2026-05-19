@@ -2,7 +2,7 @@ use super::{
     data::{About, BookOfAnswers, Data, Dice, DrawClowcard, RandomPick, RelationshipCalculator},
     InputRaw,
 };
-use crate::commands::Marker;
+use crate::{commands::Marker, handler::data::BookOfAI};
 use std::ops::Not;
 use twilight_model::{channel::Message, gateway::payload::incoming::MessageCreate};
 
@@ -61,6 +61,11 @@ impl<'a> From<&'a Message> for Data<'a> {
                     boa.author = Some(author);
                     Data::BookOfAnswers(boa)
                 }
+                Marker::BookOfAI => {
+                    let mut boai: BookOfAI = args.try_into()?;
+                    boai.author = Some(author);
+                    Data::BookOfAI(boai)
+                }
                 Marker::Dice => Data::Dice(args.into()),
                 Marker::About => Data::About(args.into()),
             })
@@ -85,6 +90,19 @@ impl<'a> TryFrom<&'a str> for RandomPick<'a> {
 }
 
 impl<'a> TryFrom<&'a str> for BookOfAnswers<'a> {
+    type Error = ParseCommandError;
+
+    fn try_from(value: &'a str) -> Result<Self, Self::Error> {
+        let input = value.is_empty().not().then_some(value);
+        Ok(Self {
+            prompt: input,
+            author: None,
+            show_prompt: false,
+        })
+    }
+}
+
+impl<'a> TryFrom<&'a str> for BookOfAI<'a> {
     type Error = ParseCommandError;
 
     fn try_from(value: &'a str) -> Result<Self, Self::Error> {

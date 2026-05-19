@@ -1,5 +1,6 @@
 pub mod animated_emoji;
 pub mod app_state;
+pub mod book_of_ai;
 pub mod book_of_answers;
 pub mod bot;
 pub mod clow_cards;

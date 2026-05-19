@@ -7,6 +7,7 @@ use twilight_model::id::{marker::UserMarker, Id};
 pub enum Data<'a> {
     RandomPick(RandomPick<'a>),
     BookOfAnswers(BookOfAnswers<'a>),
+    BookOfAI(BookOfAI<'a>),
     DrawClowcard(DrawClowcard<'a>),
     ClowCardInfo(ClowCardInfo<'a>),
     Dice(Dice),
@@ -24,6 +25,13 @@ pub struct RandomPick<'a> {
 
 #[derive(Debug)]
 pub struct BookOfAnswers<'a> {
+    pub prompt: Option<&'a str>,
+    pub author: Option<Id<UserMarker>>,
+    pub show_prompt: bool,
+}
+
+#[derive(Debug)]
+pub struct BookOfAI<'a> {
     pub prompt: Option<&'a str>,
     pub author: Option<Id<UserMarker>>,
     pub show_prompt: bool,

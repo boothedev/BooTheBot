@@ -9,6 +9,8 @@ use engine::Engine;
 
 #[tokio::main]
 async fn main() {
+    dotenvy::dotenv().ok();
+
     // Setup tracing
     tracing_subscriber::fmt().init();
 

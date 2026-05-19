@@ -22,3 +22,5 @@ rustc-hash = "2"
 base64 = "0.22.1"
 bincode = { version = "=2.0.0-rc.3", features = ["serde"] }
 arrayvec = "0.7.6"
+openai = "1.1.1"
+dotenvy = "0.15.7"
