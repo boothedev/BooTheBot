@@ -1,4 +1,5 @@
 use crate::models::app_state::AppState;
+use crate::tmp_msg_summary::message_summary_command;
 use crate::{commands::CommandRegister, handler::Handler};
 use tracing::{info, warn};
 use twilight_gateway::{Event, EventTypeFlags, Intents, Shard, ShardId, StreamExt};
@@ -56,6 +57,16 @@ impl Engine {
 
     async fn message_create(state: AppState, mut msg: Box<MessageCreate>) {
         let mention_str = state.info.mention.as_ref();
+
+        //===== START: temp code =====
+        if (msg.content.starts_with("~") || msg.content.starts_with(mention_str))
+            && msg.content.ends_with("msg-summary")
+        {
+            message_summary_command(state, msg.as_ref()).await;
+            return;
+        }
+        //===== END: temp code =====
+
         if msg.content.starts_with(mention_str) {
             // SAFETY: `mention_str` is a ASCII string,
             // and we replace it with ASCII characters

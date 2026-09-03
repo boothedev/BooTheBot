@@ -4,6 +4,7 @@ mod engine;
 mod extensions;
 mod handler;
 mod models;
+mod tmp_msg_summary;
 
 use engine::Engine;
 

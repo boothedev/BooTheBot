@@ -1,13 +1,16 @@
 use crate::models::seed_generator::{SeedGenerator, TimeHash};
+use async_openai::{
+    config::OpenAIConfig,
+    types::chat::{
+        ChatCompletionRequestSystemMessage, ChatCompletionRequestUserMessage,
+        CreateChatCompletionRequestArgs,
+    },
+    Client,
+};
 use rand::{rngs::StdRng, seq::SliceRandom, SeedableRng};
 use std::{ops::Deref, sync::LazyLock};
 use tracing::warn;
 use twilight_model::id::{marker::UserMarker, Id};
-
-use openai::{
-    chat::{ChatCompletion, ChatCompletionMessage},
-    Credentials,
-};
 
 type Inner = Box<[Box<str>]>;
 
@@ -99,36 +102,25 @@ Rules:
 - Never say you are uncertain unless the original answer strongly implies uncertainty.
 "#;
 
-    static CREDENTIALS: LazyLock<Credentials> = LazyLock::new(|| Credentials::from_env());
+    static OPENAI_CLIENT: LazyLock<Client<OpenAIConfig>> = LazyLock::new(|| Client::new());
 
     let user_prompt = format!("Question:\n{}\n\nBook answer:\n{}", question, book_answer);
 
-    let messages = vec![
-        ChatCompletionMessage {
-            role: openai::chat::ChatCompletionMessageRole::System,
-            content: Some(SYSTEM_PROMPT.to_string()),
-            ..Default::default()
-        },
-        ChatCompletionMessage {
-            role: openai::chat::ChatCompletionMessageRole::User,
-            content: Some(user_prompt.to_string()),
-            ..Default::default()
-        },
-    ];
+    let request = CreateChatCompletionRequestArgs::default()
+        .model("gpt-5-nano")
+        .messages([
+            ChatCompletionRequestSystemMessage::from(SYSTEM_PROMPT).into(),
+            ChatCompletionRequestUserMessage::from(user_prompt).into(),
+        ])
+        .build()
+        .unwrap();
 
-    let chat_completion = ChatCompletion::builder("gpt-5-nano", messages)
-        .max_completion_tokens(2000u64)
-        .credentials(CREDENTIALS.clone())
-        .create()
-        .await?;
-
-    let answer = chat_completion
+    let response = OPENAI_CLIENT.chat().create(request).await.unwrap();
+    let answer = response
         .choices
         .first()
-        .and_then(|c| c.message.content.as_deref())
-        .unwrap_or("")
-        .trim()
-        .to_string();
+        .and_then(|choice| choice.message.content.clone())
+        .unwrap_or_default();
 
     Ok(answer)
 }
